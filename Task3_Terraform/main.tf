@@ -37,7 +37,7 @@ resource "databricks_secret" "example_secret" {
 resource "databricks_notebook" "iactest" {
   path     = "/Workspace/Users/${var.databricks_user}/TestscriptIAC"
   language = "PYTHON"
-  source   = "../Code/iac.py"
+  source   = "./iac_mock_script.py"
 }
 
 resource "databricks_job" "example_job" {
