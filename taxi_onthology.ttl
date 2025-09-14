@@ -1,0 +1,72 @@
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <http://schema.org/> .
+@prefix geo:   <http://www.opengis.net/ont/geosparql#> .
+@prefix time:  <http://www.w3.org/2006/time#> .
+@prefix taxi:  <http://bosch.org/nytaxi/> .
+
+# ---------------------
+# Classes
+# ---------------------
+taxi:Trip a rdfs:Class ;
+    rdfs:label "Taxi Trip" ;
+    rdfs:subClassOf schema:Event .
+
+taxi:Location a rdfs:Class ;
+    rdfs:label "Taxi Zone" ;
+    rdfs:subClassOf schema:Place .
+
+taxi:Driver a rdfs:Class ;
+    rdfs:label "Driver" ;
+    rdfs:subClassOf schema:Person .
+
+taxi:Vehicle a rdfs:Class ;
+    rdfs:label "Vehicle" ;
+    rdfs:subClassOf schema:Vehicle .
+
+# ---------------------
+# Object Properties  (link two resources)
+# ---------------------
+taxi:pickupLocation a rdf:Property ;
+    rdfs:domain taxi:Trip ;  
+    rdfs:range taxi:Location .
+
+taxi:dropoffLocation a rdf:Property ;
+    rdfs:domain taxi:Trip ;
+    rdfs:range taxi:Location .
+
+taxi:hasDriver a rdf:Property ;
+    rdfs:domain taxi:Trip ;
+    rdfs:range taxi:Driver .
+
+taxi:hasVehicle a rdf:Property ;
+    rdfs:domain taxi:Trip ;
+    rdfs:range taxi:Vehicle .
+
+taxi:pickupTime a rdf:Property ;
+    rdfs:domain taxi:Trip ;
+    rdfs:range time:Instant .
+
+taxi:dropoffTime a rdf:Property ;
+    rdfs:domain taxi:Trip ;
+    rdfs:range time:Instant .
+
+geo:hasGeometry a rdf:Property ;
+    rdfs:domain taxi:Location ;
+    rdfs:range geo:Geometry .
+
+# ---------------------
+# Data Properties (links Object to Literal)
+# ---------------------
+taxi:fareAmount a rdf:Property ;
+    rdfs:domain taxi:Trip ;
+    rdfs:range xsd:decimal .
+
+taxi:tripDistance a rdf:Property ;
+    rdfs:domain taxi:Trip ;
+    rdfs:range xsd:float .
+
+taxi:passengerCount a rdf:Property ;
+    rdfs:domain taxi:Trip ;
+    rdfs:range xsd:int .
